@@ -1,0 +1,20 @@
+{
+ "_derivation": "Each 32-byte value is BLAKE2s-256('wg-handshake-1/' + its name), so the inputs can be regenerated. Private keys and ephemerals are raw random bytes; Curve25519 clamps them. Indices are the u32 values get_random_u32 returns. initiation_real_ns is ktime_get_real_ts64's reading at create_initiation; its nanoseconds are 3 * 2^24, a multiple of noise.c's rounding step 2^24, so the timestamp keeps them. Table keys are the first 16 bytes and psk_responder_index the first 4 bytes (little-endian) of BLAKE2s-256('wg-handshake-1/' + name). The driver scripts every random draw in call order: the three pubkey-table SipHash keys (get_random_bytes in wg_pubkey_hashtable_alloc, at device creation: initiator, responder, psk responder R'), then the initiator's ephemeral and index, the responder's, and R''s. R' has the responder's static private key and a peer for the initiator with an all-zero preshared key. Table keys only choose hash buckets and are not observed. no_identity_static is the all-zero private key of a fourth device N (created after R'), whose table key is drawn last at device creation. boot_ns is the boot clock at create_initiation (past consume_initiation's 20 ms flood window from zero); replay_delay_ns is the clock advance just before the replayed initiation.",
+ "initiator_static": "03b8082c3aa38d6f5027f547f7062568e7a40a17930c6b4f7ebf465fa0cb5e90",
+ "responder_static": "fbcbdfaaaca25a5f40f458f62ad0d41e4e42a633f01a2148c29b4a6c9c738ae9",
+ "initiator_ephemeral": "d73503e34339d80d0e95e92433bd1f016460a23056fa9c7c9ee4c06652c3f307",
+ "responder_ephemeral": "1e48c1fe8742082b8ae842ef3985575e024e08726320a7cee1b3a7840d444b86",
+ "preshared_key": "908a92d22d690f03fc5703723f822ac4dabd15c94b38f61dff2f4cf1aee77e23",
+ "initiator_index": 439041101,
+ "responder_index": 1584361601,
+ "initiation_real_ns": 1794200000050331648,
+ "initiator_table_key": "39d62d8b87c8f5ced8a7f0f366d0ee13",
+ "responder_table_key": "a3e978e67d0bc17a5b9cdf7b567a4393",
+ "psk_responder_table_key": "ecf130657cb6f492dd73a5eb63bb5bb5",
+ "psk_responder_ephemeral": "0637187f4766c33e29d7d98bd0ce3e5a4908e6ad129392a68b45b70c576421db",
+ "psk_responder_index": 48606725,
+ "no_identity_static": "0000000000000000000000000000000000000000000000000000000000000000",
+ "no_identity_table_key": "4ef2421155a7f4d70791a77601c5d9be",
+ "boot_ns": 10000000000,
+ "replay_delay_ns": 1000000000
+}
